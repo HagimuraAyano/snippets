@@ -1,0 +1,60 @@
+@charset "utf-8";
+/**
+  * 帶封面的碟片
+  */
+@mixin album(
+    $color: #666,
+    $text: '',
+    $space: 20%,
+    $direction: right,
+    $hover: false
+) {
+    position: relative;
+    $transform: translateX(60%);
+    @if $direction == top {
+        $transform: translateY(-60%);
+    } @else if $direction == bottom {
+        $transform: translateY(60%);
+    } @else if $direction == left {
+        $transform: translateX(-60%);
+    }
+    @if $hover {
+        &:hover::before {
+            transform: $transform;
+        }
+    }
+    &::before {
+        content: '';
+        width: 90%;
+        height: 90%;
+        border-radius: 50%;
+        position: absolute;
+        left: 5%;
+        top: 5%;
+        background: 
+            radial-gradient($color $space, transparent $space + 1%),
+            linear-gradient(to bottom, rgba(#FFF, 0) 40%, rgba(#FFF, 0.1) 50%, rgba(#FFF, 0) 60%),
+            linear-gradient(10deg, rgba(#FFF, 0) 40%, rgba(#FFF, 0.1) 50%, rgba(#FFF, 0) 60%),
+            linear-gradient(-10deg, rgba(#FFF, 0) 40%, rgba(#FFF, 0.1) 50%, rgba(#FFF, 0) 60%),
+            repeating-radial-gradient(#333 0, #222 3px, #333 4px);
+        @if $hover {
+            transition: transform .4s ease;
+        } @else {
+            transform: $transform;
+        }
+    }
+    &::after {
+        content: $text;
+        width: 100%;
+        height: 100%;
+        background-color: #1d1d1d;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: $color;
+        text-align: center;
+        vertical-align:middle;  
+        border: solid 2px #000;
+        border-radius: 5px;
+    }
+}

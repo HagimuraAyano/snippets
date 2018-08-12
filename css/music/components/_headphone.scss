@@ -1,0 +1,48 @@
+@charset "utf-8";
+/**
+ * 頭戴式耳機
+ */
+@mixin headphone($size: 200px, $color: #66c, $angle: 10deg) {
+  $realSize: $size * 0.95;
+  $borderWidth: $size * 0.05;
+  width: $realSize;
+  height: $realSize;
+
+  border: {
+    top: $borderWidth solid #66c;
+    left: $borderWidth solid #66c;
+    right: $borderWidth solid #66c;
+    bottom: $borderWidth solid transparent;
+  }
+  border-radius: $realSize $realSize $realSize $realSize;
+  position: relative;
+
+  &::before {
+    content: '';
+    border-right: solid #1d1d1d $size *0.1;
+    position: absolute;
+    width: $size * .15;
+    height: $size * .5;
+    background-color: #66c;
+    bottom: -$size * .1;
+    left: $size * .075;
+    border-radius: $size*.225 $size*.05 $size*.05 $size*.225;
+    transform: rotateZ(-$angle) translateZ(0);
+    outline: solid 1px transparent;
+  }
+  &::after {
+    content: '';
+    border: {
+      left: solid #1d1d1d $size *0.1;
+    };
+    position: absolute;
+    width: $size * .15;
+    height: $size * .5;
+    background-color: #66c;
+    bottom: -$size * .1;
+    right: $size * .075;
+    border-radius: $size*.05 $size*.225 $size*.225 $size*.05;
+    transform: rotateZ($angle) translateZ(0);
+    outline: solid 1px transparent;
+  }
+}

@@ -1,0 +1,38 @@
+@charset "utf-8";
+/**
+  * 錄音帶
+  */
+@mixin tape($size: 200px, $color: #66c) {
+  width: $size;
+  height: $size * .6;
+  border-radius: $size / 40;
+  position: relative;
+  background:
+  linear-gradient(to right, transparent 5%, $color 5%, $color 95%, transparent 95%) 0 80%/100% 70% no-repeat,
+  linear-gradient(to top, #333 80%, transparent 81%),
+  linear-gradient(100deg, transparent 20%, $color 21%, $color 80%, transparent 81%),
+  linear-gradient(-100deg, transparent 20%, $color 21%, $color 80%, transparent 81%);
+  background-color: #333;
+
+  &::after {
+    content: '';
+    width: $size*.12;
+    height: $size*.12;
+    position: absolute;
+    border-radius: 50%;
+    top: 45%;
+    background: #FFF;
+    left: 20%;
+    box-shadow: $size*.46 0 0 #FFF;
+  }
+  &::before {
+    content: '';
+    width: 70%;
+    left: 15%;
+    top: 38%;
+    height: $size*.2;
+    background-color: #333;
+    position: absolute;
+    border-radius: $size*.2;
+  }
+}

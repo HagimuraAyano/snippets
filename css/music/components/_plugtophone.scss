@@ -1,0 +1,102 @@
+@charset "utf-8";
+/*
+ * 插入手機的耳機
+ */
+@mixin plugToPhone($size: 200px, $color: #66c, $animation: false, $duration: 4s) {
+  $borderSize: $size*.04;
+  $height: $size - $borderSize * 2;
+  width: floor(.5 * $size);
+  height: $height;
+  position: relative;
+  &::after {
+    content: 'Orz';
+    border: solid $borderSize #1d1d1d;
+    border-radius: $borderSize;
+    background-image: linear-gradient(117deg, lighten($color, 5%) 50%, $color 51%);
+    font-size: $size / 5;
+    text-align: center;
+    color: rgba(#FFF, 0);
+    width: 100%;
+    height: 100%;
+    line-height: $height;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    @if animation {
+      animation: active $duration ease infinite;
+      @keyframes active {
+        0%, 30%, 70%, 100% {
+          color: rgba(#FFF, 0);
+        }
+        40%, 60% {
+          color: rgba(#FFF, 1);
+        }
+      }
+    }
+  }
+
+
+  $size: $size * .3;
+  &::before {
+    content: '';
+    position: absolute;
+    width: $size * .2;
+    height: $size;
+    z-index: 0;
+    bottom: - ($size + $borderSize * 2);
+    right: $borderSize;
+
+    $leftSize: floor($size*.1);
+    $leftTop: 0;
+    $leftSpaceSize: floor($size*.025);
+    $leftSpaceTop: $leftTop + $leftSize;
+    $rightSize: floor($size*.075);
+    $rightTop: $leftSpaceTop + $leftSpaceSize;
+    $rightSpaceSize: floor($leftSpaceSize);
+    $rightSpaceTop: $rightTop + $rightSize;
+    $gndSize: floor($size*.15);
+    $gndTop: $rightSpaceTop + $rightSpaceSize;
+    $gndSpaceSize: floor($size*.325);
+    $gndSpaceTop: $gndTop + $gndSize;
+    $tail1Size: floor($size*.025);
+    $tail1Top: $gndSpaceSize + $gndSpaceTop;
+    $tail2Size: floor($tail1Size);
+    $tail2Top: $tail1Top + $tail1Size;
+    $wireTop: $tail2Size + $tail2Top;
+
+    background:
+      // left
+      linear-gradient(to right, transparent #{$size*.075}, $color #{$size*.075}, $color #{$size*.125}, transparent #{$size*.125}) 0 #{$leftTop}/100% $leftSize no-repeat,
+      // left-space
+      linear-gradient(to right, transparent #{$size*.075}, #1d1d1d #{$size*.075}, #1d1d1d #{$size*.125}, transparent #{$size*.125}) 0 #{$leftSpaceTop}/100% $leftSpaceSize no-repeat,
+      // right
+      linear-gradient(to right, transparent #{$size*.065}, $color #{$size*.065}, $color #{$size*.135}, transparent #{$size*.135}) 0 #{$rightTop}/100% $rightSize no-repeat,
+      // right-space
+      linear-gradient(to right, transparent #{$size*.065}, #1d1d1d #{$size*.065}, #1d1d1d #{$size*.135}, transparent #{$size*.135}) 0 #{$rightSpaceTop}/100% $rightSpaceSize no-repeat,
+      // gnd
+      linear-gradient(to right, transparent #{$size*.05}, $color #{$size*.05}, $color #{$size*.15}, transparent #{$size*.15}) 0 #{$gndTop}/100% $gndSize no-repeat,
+      // gnd-space
+      linear-gradient(to right, #1d1d1d 0, #1d1d1d 100%) 0 #{$gndSpaceTop}/100% $gndSpaceSize no-repeat,
+      // tail-1
+      linear-gradient(to right, transparent #{$size*.02}, #1d1d1d #{$size*.02}, #1d1d1d #{$size*.18}, transparent #{$size*.18}) 0 #{$tail1Top}/100% $tail1Size no-repeat,
+      // tail-2
+      linear-gradient(to right, transparent #{$size*.04}, #1d1d1d #{$size*.04}, #1d1d1d #{$size*.16}, transparent #{$size*.16}) 0 #{$tail2Top}/100% $tail2Size no-repeat,
+      // wire
+      linear-gradient(to right, transparent #{$size*.075}, #1d1d1d, #{$size*.075}, #1d1d1d #{$size*.125}, transparent #{$size*.125}) 0 #{$wireTop}/100% auto no-repeat;
+      ;
+
+      // 是否開啓動畫
+      @if $animation {
+        animation: plugin $duration ease infinite;
+        @keyframes plugin {
+          0%, 30%, 70%, 100% {
+            transform: translateY(0);
+          }
+          40%, 60% {
+            transform: translateY(-$gndSpaceTop);
+          }
+        }
+      }
+  }
+
+}

@@ -1,0 +1,65 @@
+@charset "utf-8";
+body {
+    background-color: #DDD;
+    h1 {
+        text-align: center;
+    }
+}
+
+@import "./components/album.scss";
+.album {
+    margin: 40px auto;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    font-size: 60px;
+    @include album($color:#66c, $text: 'Orz');
+}
+
+@import "./components/speaker";
+.speaker {
+    margin: 40px auto;
+    @include speaker(180px, $mask: #66c);
+}
+
+@import "./components/disk";
+.disk {
+    margin: 40px auto;
+    @include disk($color:#66c);
+}
+
+@import "./components/headphone";
+.headphone {
+    margin: 40px auto;
+    @include headphone($angle: 20deg);
+}
+
+@import "./components/plug";
+.plug {
+    margin: 40px auto;
+    @include plug();
+}
+
+@import "./components/phone";
+.phone {
+    margin: 40px auto;
+    @include phone();
+}
+
+@import "./components/plugtophone";
+.plugtophone {
+    margin: 40px auto 80px;
+    @include plugToPhone($animation: true);
+}
+
+@import "./components/tape";
+.tape {
+    margin: 40px auto;
+    @include tape();
+}
+
+@import "./components/keyboard";
+.keyboard {
+     margin: 40px auto;
+    @include keyboard();
+}
